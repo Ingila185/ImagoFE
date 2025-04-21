@@ -82,33 +82,40 @@ export default function SearchInput({
         </div>
       ) : (
         <div className="flex flex-wrap gap-4">
-          {images.map((image: any, index: number) => {
-            const fallbackImage = "/not-found.jpg";
-            const imageUrl =
-              process.env.NEXT_PUBLIC_THUMBNAIL_URL +
-              `${image.bildnummer.toString().padStart(10, "0")}/s.jpg`;
+          {images &&
+            images.map((image: any, index: number) => {
+              const fallbackImage = "/not-found.jpg";
+              const imageUrl =
+                process.env.NEXT_PUBLIC_THUMBNAIL_URL +
+                `${image.bildnummer.toString().padStart(10, "0")}/s.jpg`;
 
-            return (
-              <div key={index} className="flex flex-col items-center">
-                <Image
-                  src={imageUrl}
-                  alt={image.alt || "Gallery Image"}
-                  width={image.hoehe || 200}
-                  height={image.breite || 200}
-                  className="rounded-lg shadow-md"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = fallbackImage;
-                  }}
-                />
-                <h3 className="text-base font-semibold text-gray-600 mt-4 text-center sm:text-left">
-                  Photographer: {image.fotografen || "Unknown"}
-                </h3>
-                <p className="text-sm text-gray-400 mt-2 text-center sm:text-left">
-                  {image.suchtext || "No description available"}
-                </p>
-              </div>
-            );
-          })}
+              return (
+                <div key={index} className="flex flex-col items-center">
+                  <Image
+                    src={imageUrl}
+                    alt={image.alt || "Gallery Image"}
+                    width={image.hoehe || 200}
+                    height={image.breite || 200}
+                    className="rounded-lg shadow-md"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = fallbackImage;
+                    }}
+                  />
+                  <h3 className="text-base font-semibold text-gray-600 mt-4 text-center sm:text-left">
+                    Photographer: {image.fotografen || "Unknown"}
+                  </h3>
+                  <p className="text-sm text-gray-400 mt-2 text-center sm:text-left">
+                    {image.suchtext || "No description available"}
+                  </p>
+                </div>
+              );
+            })}
+
+          {images.length === 0 && (
+            <p className="text-sm text-gray-400 mt-2 text-center sm:text-left">
+              No Image found
+            </p>
+          )}
         </div>
       )}
     </div>
