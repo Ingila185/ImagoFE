@@ -85,14 +85,11 @@ export default function SearchInput({
           {images &&
             images.map((image: any, index: number) => {
               const fallbackImage = "/not-found.jpg";
-              const imageUrl =
-                process.env.NEXT_PUBLIC_THUMBNAIL_URL +
-                `${image.bildnummer.toString().padStart(10, "0")}/s.jpg`;
 
               return (
                 <div key={index} className="flex flex-col items-center">
                   <Image
-                    src={imageUrl}
+                    src={image.thumbnail_url || fallbackImage}
                     alt={image.alt || "Gallery Image"}
                     width={image.hoehe || 200}
                     height={image.breite || 200}

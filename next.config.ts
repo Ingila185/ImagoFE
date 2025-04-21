@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.imago-images.de",
         port: "",
-        pathname: "/bild/st/**", // Allows any path starting with /bild/st/
+        pathname: "/bild/**", // Allows any path starting with /bild
         search: "",
       },
       {
